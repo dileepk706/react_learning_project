@@ -1,38 +1,262 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul{
+  list-style-type: none;
+}
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: wrap;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.logo{
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu{
+  flex: 2 1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menu ul{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer{
+  height: 200px;
+  width: 100%;
+  background-color: orange;
+}
+
+.container{
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+}
+.gallery{
+  flex: 2 1;
+}
+
+.itaaem img{
+  width: 100%;
+  border-radius: 10px;
+  flex: 1 1 260px;
+
+}
+.itssem{
+  max-width: 250px;
+ background-color: rgb(255, 194, 172);
+ padding: 5px;
+ margin: 5px;
+ position: relative;
+ 
+}
+.gImage{
+  width: 100%;
+  max-width:250px ;
+}
+.itemss{
+  /* margin: 10px 0 0 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* align-content: flex-start; */
+} */
+.actions button{
+  margin: 10px;
+}
+.actions{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favItems{
+  flex: 1 1;
+  border: 2px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.favItem{
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.favItem img{
+  width: 100%;
+}
+
+.love{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: 18px;
+  transform: translateY(15px);
+
+  display: inline;
+  transition: 1s;
+}
+
+.love:hover{
+  /* display: none; */
+  transform: translateY(15px);
+
+}
+
+.counter{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.counter div{
+  
+  display: flex;
+  justify-content: space-evenly;
+}
+.counter div button{
+  width: 100px;
+  height: 60px;
+  margin: 20px;
+}
+
+/* food app */
+
+.here-section{
+  overflow: hidden;
+  position: relative;
+
+} 
+.Hcontainer{
+  max-width: 100%;
+}
+.Hcontainer img{
+  width: 100%;
+  position: relative;
+}
+
+.hero-contet{
+  max-width: 500px;
+  position: absolute;
+  top:30% ;
+  right: 100px;
+  text-shadow: 1px 1px 2px black, 0 0 1em rgb(7, 7, 12), 0 0 0.2em rgb(232, 232, 236);
+  color: white;
+  transform: translateY(-50px);
+}
+
+.special{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.special-dishes-content{
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 30px auto 10px auto;
+  text-align: center;
+}
+.items{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+  padding: 20px;
+  gap: 10px;
+}
+.item{
+  flex: 1 1 250px;
 }
 
-.App-link {
-  color: #61dafb;
+.item-image  {
+  width: 100%; 
+  
+
+}
+.item-image img{
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchItems{
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  gap: 10px;
+  border: 5px solid black;
+  padding: 5px;
+  margin-left: 5px;
+border-radius: 10px;
+}
+.searchItem{
+  width: 100%;
+  max-width: 150px;
+
+}
+.searchItem img{
+  width: 100%;
+  border-radius: 25px;
+
+}
+.items-section{
+  display: flex;
+    flex-wrap: wrap;
+    flex: 5 1;
+    gap: 10px;
+}
+.filter-section{
+  max-width: 200px;
+  flex: 1 1;
+}
+.search{
+  margin: 10px;
+
+}
+.search button{
+  width: 100px;
+}
+.search input{
+  width: 100px;
+  height: 32px;
+}
+.category-buttons{
+  display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.category-buttons button{
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: yellow;
+  transition: 0.6s;
+}
+.category-buttons button:hover{
+  background-color: orange;
+  transform: scale(0.8);
 }
