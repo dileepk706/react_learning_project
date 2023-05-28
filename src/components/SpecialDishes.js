@@ -4,25 +4,27 @@ import Items from "./items"
 const SpecialDishes=(props)=>
 {
     let [searchItems,searchItemsState]=useState([])
-    
+    let [loading,loadingState]=useState(true)
     console.log('props');
    
     let flag=0
     const search=async(api)=>{
+        loadingState(true)
         let r= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${api}`)
         let p=await r.json()
         console.log(p.meals);
         searchItemsState(p.meals)
-        flag=1
+        loadingState(false)
     }
   
         let filter=(cate)=>{
+        loadingState(true)
             
             let data=searchItems.filter(e=>{
                 return e.strCategory==cate
             })
             searchItemsState(data)
-            flag=0
+            loadingState(false)
         }
    
     
@@ -79,7 +81,7 @@ const SpecialDishes=(props)=>
                     <button onClick={async () => {
                         let d = document.getElementById('g').value
                         search(d)
-                    }}>searhc by country name</button>
+                    }}>searhc by name</button>
 
                 </div>
 
@@ -92,7 +94,7 @@ const SpecialDishes=(props)=>
                         </div>
                     </div>
                     <div className="items-section">
-                    {sResult}
+                    {!loading?sResult: <h3>loading...</h3>} 
                     </div>
                     
 

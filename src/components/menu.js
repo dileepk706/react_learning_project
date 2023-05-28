@@ -5,6 +5,7 @@ import SpecialDishes from "./SpecialDishes"
 const Menu=()=>
 {
     let [dishes,dishesState]=useState([])
+    let [loading,loadingState]=useState(true)
 
     const getAllItems = async () => {
         try {
@@ -14,7 +15,7 @@ const Menu=()=>
 
         const data = await response.json()
         dishesState(data.meals)
-        console.log(data);
+        loadingState(false)
         // console.log(dishes); 
         } catch (error) {
             console.log("somthing error happened");
@@ -32,9 +33,7 @@ const Menu=()=>
         <div>
         
         <Hearo></Hearo>
-        <SpecialDishes
-            dishes={dishes}
-        /> 
+        {!loading ?<SpecialDishes dishes={dishes}/> : <h1>loading</h1> }
         </div>
     )
 
