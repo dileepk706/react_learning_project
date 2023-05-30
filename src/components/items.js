@@ -16,7 +16,7 @@ const Items=(props)=>
 
     return(
         <div className="item">
-            <div className="item-image">
+            <div className="global_category_item">
                 <img src={props.items.strMealThumb}></img>
             </div>
             <div className="item-actions">
