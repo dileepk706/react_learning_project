@@ -10,7 +10,7 @@ const Menu=()=>
     const getAllItems = async () => {
         try {
             console.log('function called');
-        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=b')
         console.log('response');
 
         const data = await response.json()
@@ -32,7 +32,7 @@ const Menu=()=>
     return(
         <div>
         
-        <Hearo></Hearo>
+        {/* <Hearo></Hearo> */}
         {!loading ?<SpecialDishes dishes={dishes}/> : <h1>loading</h1> }
         </div>
     )
