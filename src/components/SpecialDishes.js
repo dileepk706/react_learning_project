@@ -1,8 +1,12 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import Items from "./items"
 import Categories from "./category";
 import Pagination from "./pagination";
 import Popup from "./popup";
+import { AllMenuContext } from "./AllMenuContext";
+
+export const PopupContext=React.createContext()
+
 
 const SpecialDishes = (props) => {
     let [searchItems, searchItemsState] = useState([])
@@ -29,26 +33,29 @@ const SpecialDishes = (props) => {
         loadingState(false)
     }
 
+    //usage of glonbal state 
 
+    let allMenuContext=useContext(AllMenuContext)
 
 
     let firsIndx = crrPage * pagePerWidow - pagePerWidow
     let lastIndx = crrPage * pagePerWidow
 
-    let newItems = props.dishes.slice(firsIndx, lastIndx)
+    let newItems = allMenuContext.slice(firsIndx, lastIndx)
     
     //popup true/false handler
     let [popupDataDisplay,popupDataDisplayState]=useState({})
-    const popupHandler=(a,itemData)=>{
+    const popupHandler=(a,itemData)=>{ 
         popupState(a)
         popupDataDisplayState(itemData)
     }
 
+    //take global state for popupHandler
     let items = newItems.map(e => {
         return (
             <Items
                 items={e}
-                popupState={popupHandler}
+                 
             />
         )
     })
@@ -83,7 +90,8 @@ const SpecialDishes = (props) => {
     })
     return (
         <div>
-            {popup && <Popup popupState={popupHandler} popupDataDisplay={popupDataDisplay} />}
+        <PopupContext.Provider value={popupHandler}>
+            {popup && <Popup  popupDataDisplay={popupDataDisplay} />}
             <div className="special">
 
                 <div className="special-dishes-content">
@@ -94,8 +102,8 @@ const SpecialDishes = (props) => {
                     {/* display top item */}
                     {items}
                 </div>
-                {/* pagination */}
-                <Pagination items={props.dishes} currentpage={crrPageState} pages={pagePerWidow} />
+                {/* pagination ---taked global context in pagination file---- */}
+                <Pagination  currentpage={crrPageState} pages={pagePerWidow} />
 
 
                 <div className="">
@@ -131,7 +139,7 @@ const SpecialDishes = (props) => {
             </div>
 
             <Categories items={items} popupState={popupHandler} />
-
+            </PopupContext.Provider >
         </div>
 
 

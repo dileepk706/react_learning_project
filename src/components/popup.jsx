@@ -1,14 +1,18 @@
-
+import { useContext } from "react";
+import { PopupContext } from "./SpecialDishes";
 const Popup=({popupState, popupDataDisplay})=>{
 
 console.log('popupDataDisplay');
 console.log(popupDataDisplay);
+let popupContext=useContext(PopupContext)
+console.log(popupContext);
     return(
         <div className="popup">
             <div className="popup_content">
                 <div className="closingbtn">
                     <button onClick={()=>{
-                        popupState(false)
+                        //the function popupContext is same as  popupState(false) ...but this is global context
+                        popupContext(false)
                     }}>close</button>
                 </div>
                 

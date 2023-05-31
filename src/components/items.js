@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 //re-using componet
-
+import { PopupContext } from "./SpecialDishes"
 
 const Items=(props)=>
 {
+    let popupContext=useContext(PopupContext)
     let [fav,favState]=useState('add to fav')
 
     let favBtn=()=>{
@@ -20,7 +21,7 @@ const Items=(props)=>
         <div className="item">
             <div className="global_category_item">
                 <img onClick={()=>{
-                    props.popupState(true,props.items)
+                    popupContext(true,props.items)
                 }} src={props.items.strMealThumb}></img>
             </div>
             <div className="item-actions">
