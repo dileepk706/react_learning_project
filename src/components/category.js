@@ -68,10 +68,13 @@ const Categories = (props) =>{
     let categoryDisplayItems=filterItem.map(e=>{
         
         return(
-            // <div className="global_category_item">
-            //         <img src={e.strMealThumb} alt="" />
-            //     </div>
-            <Items items ={e} /> 
+        
+            //reuse componets
+            <Items 
+                items ={e} 
+                //this popus state chaching function is comming from special.ja
+                popupState={props.popupState}
+            /> 
         )
     })
 

@@ -1,4 +1,6 @@
 import { useState } from "react"
+//re-using componet
+
 
 const Items=(props)=>
 {
@@ -17,7 +19,9 @@ const Items=(props)=>
     return(
         <div className="item">
             <div className="global_category_item">
-                <img src={props.items.strMealThumb}></img>
+                <img onClick={()=>{
+                    props.popupState(true,props.items)
+                }} src={props.items.strMealThumb}></img>
             </div>
             <div className="item-actions">
                 <button onClick={()=>{

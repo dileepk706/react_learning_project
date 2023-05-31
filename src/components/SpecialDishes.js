@@ -2,70 +2,77 @@ import { useState } from "react";
 import Items from "./items"
 import Categories from "./category";
 import Pagination from "./pagination";
+import Popup from "./popup";
 
-const SpecialDishes=(props)=>
-{
-    let [searchItems,searchItemsState]=useState([])
-    let [loading,loadingState]=useState(true)
-    let[crrPage,crrPageState]=useState(1)
-    let[pagePerWidow,pagePerWidowStae]=useState(6)
-   
-    const search=async(api)=>{
+const SpecialDishes = (props) => {
+    let [searchItems, searchItemsState] = useState([])
+    let [loading, loadingState] = useState(true)
+    let [crrPage, crrPageState] = useState(1)
+    let [pagePerWidow, pagePerWidowStae] = useState(6)
+    let [popup, popupState] = useState(false)
+    const search = async (api) => {
         loadingState(true)
-        let r= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${api}`)
-        let p=await r.json()
+        let r = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${api}`)
+        let p = await r.json()
         console.log(p.meals);
         searchItemsState(p.meals)
         loadingState(false)
     }
-  
-        let filter=(cate)=>{
+
+    let filter = (cate) => {
         loadingState(true)
-            
-            let data=searchItems.filter(e=>{
-                return e.strCategory==cate
-            })
-            searchItemsState(data)
-            loadingState(false)
-        }
-   
 
-      
+        let data = searchItems.filter(e => {
+            return e.strCategory == cate
+        })
+        searchItemsState(data)
+        loadingState(false)
+    }
 
-        let firsIndx=crrPage*pagePerWidow-pagePerWidow
-        let lastIndx=crrPage*pagePerWidow
-   
-        let newItems=props.dishes.slice(firsIndx,lastIndx)
 
+
+
+    let firsIndx = crrPage * pagePerWidow - pagePerWidow
+    let lastIndx = crrPage * pagePerWidow
+
+    let newItems = props.dishes.slice(firsIndx, lastIndx)
     
-    let items=newItems.map(e => {
+    //popup true/false handler
+    let [popupDataDisplay,popupDataDisplayState]=useState({})
+    const popupHandler=(a,itemData)=>{
+        popupState(a)
+        popupDataDisplayState(itemData)
+    }
+
+    let items = newItems.map(e => {
         return (
             <Items
                 items={e}
+                popupState={popupHandler}
             />
         )
     })
-  
-    let sResult=searchItems.map(e=>{
+
+    let sResult = searchItems.map(e => {
         return (
             <div className="searchItem">
                 <img src={e.strMealThumb} alt="" />
             </div>
         )
     })
-   
 
-    let categories=searchItems.map(e=>{
+
+    let categories = searchItems.map(e => {
         return e.strCategory
     })
- 
-    let uniqCategory=[...new Set(categories)]
-     
-    
-    let buttons=uniqCategory.map(e=>{
-        return(
-            
-            <button onClick={async ()=> {
+
+    let uniqCategory = [...new Set(categories)]
+
+
+    let buttons = uniqCategory.map(e => {
+        return (
+
+            <button onClick={async () => {
                 // let responce=await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${e}`)
                 // let data=await responce.json();
                 // console.log(data);
@@ -74,8 +81,9 @@ const SpecialDishes=(props)=>
 
         )
     })
-    return(
+    return (
         <div>
+            {popup && <Popup popupState={popupHandler} popupDataDisplay={popupDataDisplay} />}
             <div className="special">
 
                 <div className="special-dishes-content">
@@ -122,11 +130,11 @@ const SpecialDishes=(props)=>
 
             </div>
 
-            <Categories items={items} />
+            <Categories items={items} popupState={popupHandler} />
 
         </div>
 
-        
+
     )
 }
 
