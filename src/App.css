@@ -145,8 +145,7 @@ ul{
 /* food app */
 
 .here-section{
-  overflow: hidden;
-  position: relative;
+ width: 100%;
 
 } 
 .Hcontainer{
@@ -408,4 +407,78 @@ border-radius: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
+}
+
+.cart-container{
+  width: 260px;
+  display: flex;
+  gap: 5px;
+  padding: 4px;
+  background-image: linear-gradient(to right top, #ecf1f2, #c1c6c7, #979d9e, #6f7676, #4a5151);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.cart-item-image{
+    width: 127px;
+}
+.cart-item-image img{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+
+}
+
+.cart-main-container{
+  display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 175px;
+    right: 0;
+    bottom: 25%;
+    gap: 5px;
+    /* background-image: linear-gradient(to right top, #ecf1f2, #deebed, #d0e4e6, #c1dee0, #b3d8d8); */
+    padding: 10px;
+    overflow-y: auto;
+    background-image: linear-gradient(to right top, #101516, #121d1f, #122627, #112e2f, #0f3737);
+    display: none;
+  transition: opacity 0.5s;
+}
+ 
+ 
+.cart-main-container-show{
+  display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 175px;
+    right: 0;
+    bottom: 25%;
+    gap: 5px;
+    /* background-image: linear-gradient(to right top, #ecf1f2, #deebed, #d0e4e6, #c1dee0, #b3d8d8); */
+    padding: 10px;
+    overflow-y: auto;
+    background-image: linear-gradient(to right top, #101516, #121d1f, #122627, #112e2f, #0f3737);
+  transform: translateY(100px);
+
+  display: inline;
+  opacity: 1;
+  transition: 1s;
+
+}
+.cart-button{
+  right: 0;
+  bottom: 80%;
+  gap: 5px;
+  position: fixed;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: yellow;
+  transition: 0.6s;
+}
+.black{
+  color: black;
+}
+.red{
+  color: red;
 }

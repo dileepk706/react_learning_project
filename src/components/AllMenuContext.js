@@ -10,9 +10,7 @@ export const AllMenu=(props)=>{
 
     const getAllItems = async () => {
         try {
-            console.log('function called');
         const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=b')
-        console.log('response');
 
         const data = await response.json()
         dishesState(data.meals)
@@ -26,7 +24,6 @@ export const AllMenu=(props)=>{
     }
      
     useEffect(()=>{ 
-        console.log('useefect');
         getAllItems()
     },[])
 

@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { PopupContext } from "./SpecialDishes";
-const Popup=({popupState, popupDataDisplay})=>{
+import { DispatchContext } from '../context/appProvider';
 
-console.log('popupDataDisplay');
-console.log(popupDataDisplay);
+const Popup=({addCart, popupDataDisplay})=>{
+
+let dispatchContext=useContext(DispatchContext)
 let popupContext=useContext(PopupContext)
-console.log(popupContext);
     return(
         <div className="popup">
             <div className="popup_content">
@@ -26,8 +26,18 @@ console.log(popupContext);
                         <ul>
                             <li>Name : {popupDataDisplay.strMeal}</li>
                             <li>Category : {popupDataDisplay.strCategory}</li>
+                            <li>Price: ₹599</li>
                         </ul>
-                        <button>Add to Cart</button>
+                        <button onClick={()=>{
+                            // addCart(popupDataDisplay.strMealThumb,popupDataDisplay.strMeal,599)
+                            dispatchContext({
+                                type:'add-to-cart',
+                                payload:{
+                                    name:popupDataDisplay.strMeal,
+                                    img:popupDataDisplay.strMealThumb
+                                }
+                            })
+                        }}>Add to Cart</button>
                     </div>
                 </div>
                 

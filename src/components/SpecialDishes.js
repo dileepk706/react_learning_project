@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Items from "./items"
 import Categories from "./category";
 import Pagination from "./pagination";
 import Popup from "./popup";
 import { AllMenuContext } from "./AllMenuContext";
-
+import CartData from "./cart";
+import { CartStateContext } from "../context/appProvider";
 export const PopupContext=React.createContext()
 
+ 
 
 const SpecialDishes = (props) => {
     let [searchItems, searchItemsState] = useState([])
@@ -14,11 +16,42 @@ const SpecialDishes = (props) => {
     let [crrPage, crrPageState] = useState(1)
     let [pagePerWidow, pagePerWidowStae] = useState(6)
     let [popup, popupState] = useState(false)
+    let [cartData,cartDataState]=useState([])
+    let [hideAndDisplay ,hideAndDisplayState]=useState('hide')
+
+    //context of app provider
+    let cartStateContext=useContext(CartStateContext)
+    // console.log('cartStateContext',cartStateContext);
+
+    //hide and display the cart items
+    const hideAndDisplayHelper=()=>{
+        hideAndDisplayState(prev=>{
+            if(prev=='cart-main-container'){
+                return 'cart-main-container-show'
+            }else{
+                return 'cart-main-container'
+            }
+        })
+    }
+    //cartData adding into states
+    const addCart=(Img,Name,Price)=>{
+
+        let cartObt={
+            img:Img,
+            name:Name,
+            price:Price
+        }
+        //item.name===Name
+    let isExist=cartStateContext.map(item=> console.log('item',item))
+    isExist?alert('Item is already exist in the cart'):cartDataState([cartObt,...cartData])
+        
+    }
+   
+
     const search = async (api) => {
         loadingState(true)
         let r = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${api}`)
         let p = await r.json()
-        console.log(p.meals);
         searchItemsState(p.meals)
         loadingState(false)
     }
@@ -82,16 +115,28 @@ const SpecialDishes = (props) => {
             <button onClick={async () => {
                 // let responce=await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${e}`)
                 // let data=await responce.json();
-                // console.log(data);
                 filter(e)
             }} >{e}</button>
 
         )
     })
+    let cartDataComponents=cartStateContext.map(e=>{
+        return(
+            <CartData items={e} /> 
+        )
+    })
     return (
         <div>
         <PopupContext.Provider value={popupHandler}>
-            {popup && <Popup  popupDataDisplay={popupDataDisplay} />}
+            {popup && <Popup  popupDataDisplay={popupDataDisplay} addCart={addCart} />}
+
+            {/* cart display */}
+        <button className="cart-button" onClick={hideAndDisplayHelper}>Cart</button>
+        <div className={hideAndDisplay}>
+            {cartDataComponents}
+        </div>  
+          
+
             <div className="special">
 
                 <div className="special-dishes-content">
@@ -99,7 +144,6 @@ const SpecialDishes = (props) => {
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ea quibusdam veritatis numquam nostrum facere nisi rem aperiam, deserunt est. Neque dicta similique iste necessitatibus omnis facere ex eius laboriosam!</p>
                 </div>
                 <div className="items">
-                    {/* display top item */}
                     {items}
                 </div>
                 {/* pagination ---taked global context in pagination file---- */}
@@ -138,8 +182,9 @@ const SpecialDishes = (props) => {
 
             </div>
 
-            <Categories items={items} popupState={popupHandler} />
             </PopupContext.Provider >
+            {/* <Categories items={items} popupState={popupHandler} /> */}
+
         </div>
 
 
