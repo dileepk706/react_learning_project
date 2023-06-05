@@ -1,12 +1,20 @@
 import React,{useEffect, useState} from "react";
 import './App.css';
 import Menu from "./components/menu";
+import { Juice } from "./components/Juice";
+import { Cake } from "./components/Cake";
 
 const App=()=>{
 
   return(
-    <Menu/>
+    <center>
+      <Juice />
+      <Cake />
+    </center>
+      
   )
+
+  
 }
 export default App;
 
